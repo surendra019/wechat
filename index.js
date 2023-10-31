@@ -8,7 +8,7 @@ const io = new Server(server);
 app.use(express.static(__dirname));
 
 app.get('/', (req, res)=>{
-  res.sendFile('index.html');
+  res.sendFile('chatapp.html');
 });
 
 io.on('connection', (socket)=>{

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Chat App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="chatapp.css">
+    
+         
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>weChat</h1>
+        </div>
+
+            <div id="msgs-container">
+                <ul id="recieved-msgs">
+             
+             </ul>
+             <ul id="sent-msgs">
+              
+             </ul>
+             </div>
+           
+            <!-- Add more messages here -->
+       
+        <div class="chat-input">
+            <form action="" id="myForm">
+            <input type="text" placeholder="Type a message...">
+            <input type="submit" id="submit" value="Send">
+        </form>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+    <script>
+        //   let name=  prompt("Enter your name: ");
+  let name = "SK";
+  var socket = io();
+
+  var submit= document.getElementById('submit');
+  var form = document.getElementById('myForm');
+  
+  socket.emit('connected', name);
+  
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (input.value) {
+      send_msg(input.value);
+      socket.emit('chat message', {msg : input.value, name: name});
+      input.value = '';
+    }
+  })
+  // submit.addEventListener('click', function(e) {
+  //   e.preventDefault();
+  //   if (input.value) {
+  //     send_msg(input.value);
+  //     socket.emit('chat message', input.value);
+  //     input.value = '';
+  //   }
+  // });
+
+    socket.on('client msg', function(obj) {
+      console.log("recieved by client")
+      recieve_msg(obj.msg, obj.name);
+    });
+
+    socket.on('client connected', function(name){
+      showToast(name, 'connected');
+    });
+    </script>
+</body>
+</html>
