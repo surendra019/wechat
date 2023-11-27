@@ -1,0 +1,17 @@
+@media only screen and (max-width: 600px){
+    
+    .body-left{
+        position: absolute;
+        left: -100%;
+    }
+    .navbar-left{
+        display: inline;
+    }
+    .navbar-center{
+        text-align: center;
+    }
+    .navbar-right{
+        position: relative;
+    }
+
+}
